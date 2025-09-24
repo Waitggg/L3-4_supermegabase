@@ -1,17 +1,21 @@
-fetch('https://jsonplaceholder.typicode.com/users')
+const promise1 = new Promise((resolve, reject) => {
+    fetch('https://jsonplaceholder.typicode.com/users')
     .then((data) => data.json())
-    .then((users) => users.map(user => ({
+    .then((users) => { const resUsers = users.map(user => ({
         id: user.id,
         name: user.name,
         username: user.username,
         email: user.email,
         phone: user.phone
-    })))
-    .then((users) => console.log(users))
-    .catch(error => console.log("Ошибка " + error));
+    }))
+    resolve(console.log(resUsers)); })
+    .catch(error=>reject(console.log(error)));
+});
 
-fetch('https://jsonplaceholder.typicode.com/todos')
+const promise2 = new Promise((resolve, reject) => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
     .then((data) => data.json())
-    .then((users) => users.filter(user => user.completed == false))
-    .then((users) => console.log(users))
-    .catch(error => console.log("Ошибка " + error));
+    .then((users) => {const resUsers = users.filter(user => user.completed == false)
+    resolve(console.log(resUsers));})
+    .catch(error=>reject(console.log(error)));
+});
